@@ -24,4 +24,16 @@ class UserRepositoryTest {
         log.info(admin.getUsername());
         log.info(admin.getPassword());
     }
+    @Test
+    void getEnum() {
+        UserEntity admin = userRepository.findByUsername("admin").orElse(null);
+        assertNotNull(admin);
+        assertNotNull(admin.getUsername());
+        assertNotNull(admin.getPassword());
+        log.info(admin.getUsername());
+        log.info(admin.getPassword());
+        log.info(admin.getRoles().toString());
+    }
+
+
 }

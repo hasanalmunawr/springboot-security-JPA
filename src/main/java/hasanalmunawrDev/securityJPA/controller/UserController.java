@@ -17,22 +17,27 @@ public class UserController {
         return ResponseEntity.ok("Anyone API accessed By : " + principal.getName());
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_BOSS')")
+    @PreAuthorize("hasAnyRole('STAFF, OWNER')")
+    @GetMapping(path = "/staff")
+    public ResponseEntity<?> staff(Principal principal) {
+        return ResponseEntity.ok("Staff API Accessed By : " + principal.getName());
+    }
+    @PreAuthorize("hasAnyRole('MANAGER,OWNER')")
     @GetMapping(path = "/manager")
     public ResponseEntity<?> manager(Principal principal) {
         return ResponseEntity.ok("Manager API Accessed By : " + principal.getName());
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_MANAGER, ROLE_BOSS')")
+    @PreAuthorize("hasAnyRole('ADMIN, MANAGER, OWNER')")
     @GetMapping(path = "/admin")
     public ResponseEntity<?> admin(Principal principal) {
         return ResponseEntity.ok("Admin API Accessed By : " + principal.getName());
     }
 
-    @PreAuthorize("hasRole('ROLE_BOSS')")
-    @GetMapping(path = "/boss")
+    @PreAuthorize("hasRole('OWNER')")
+    @GetMapping(path = "/owner")
     public ResponseEntity<?> owner(Principal principal) {
-        return ResponseEntity.ok("Boss API Accessed By : " + principal.getName());
+        return ResponseEntity.ok("Owner API Accessed By : " + principal.getName());
     }
 
 

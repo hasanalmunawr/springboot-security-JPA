@@ -1,5 +1,6 @@
 package hasanalmunawrDev.securityJPA;
 
+import hasanalmunawrDev.securityJPA.entity.Role;
 import hasanalmunawrDev.securityJPA.entity.UserEntity;
 import hasanalmunawrDev.securityJPA.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -21,23 +22,28 @@ public class SpringbootSecurityJpaApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		return args -> {
-			UserEntity admin = new UserEntity();
-			admin.setUsername("admin");
-			admin.setPassword(passwordEncoder.encode("rahasia"));
-			admin.setRoles("ROLE_ADMIN, ROLE_MANAGER");
+			UserEntity staff = new UserEntity();
+			staff.setUsername("staff");
+			staff.setPassword(passwordEncoder.encode("rahasia"));
+			staff.setRoles(Role.STAFF.getName());
 
 			UserEntity manager = new UserEntity();
 			manager.setUsername("manager");
 			manager.setPassword(passwordEncoder.encode("rahasia"));
-			manager.setRoles("ROLE_MANAGER");
+			manager.setRoles(Role.MANAGER.getName());
 
-			UserEntity boss = new UserEntity();
-			boss.setUsername("hasan");
-			boss.setPassword(passwordEncoder.encode("rahasia"));
-			boss.setRoles("ROLE_ADMIN, ROLE_MANAGER, ROLE_BOSS"); // ERROR AT THIS LINE
+			UserEntity admin = new UserEntity();
+			admin.setUsername("admin");
+			admin.setPassword(passwordEncoder.encode("rahasia"));
+			admin.setRoles(Role.ADMIN.getName());
+
+			UserEntity owner = new UserEntity();
+			owner.setUsername("hasan");
+			owner.setPassword(passwordEncoder.encode("rahasia"));
+			owner.setRoles(Role.OWNER.getName()); // ERROR AT THIS LINE
 
 
-			userRepository.saveAll(List.of(admin, manager, boss));
+			userRepository.saveAll(List.of(admin, manager, owner, staff));
 		};
 	}
 }
