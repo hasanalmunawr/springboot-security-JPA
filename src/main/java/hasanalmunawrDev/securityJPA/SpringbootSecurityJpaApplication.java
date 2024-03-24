@@ -31,13 +31,13 @@ public class SpringbootSecurityJpaApplication {
 			manager.setPassword(passwordEncoder.encode("rahasia"));
 			manager.setRoles("ROLE_MANAGER");
 
-//			UserEntity boss = new UserEntity();
-//			manager.setUsername("hasan");
-//			manager.setPassword(passwordEncoder.encode("rahasia"));
-//			admin.setRoles("ROLE_ADMIN, ROLE_MANAGER, ROLE_BOSS");
+			UserEntity boss = new UserEntity();
+			boss.setUsername("hasan");
+			boss.setPassword(passwordEncoder.encode("rahasia"));
+			boss.setRoles("ROLE_ADMIN, ROLE_MANAGER, ROLE_BOSS"); // ERROR AT THIS LINE
 
 
-//			userRepository.saveAll(List.of(admin, manager, boss));
+			userRepository.saveAll(List.of(admin, manager, boss));
 		};
 	}
 }
